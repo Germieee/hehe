@@ -51,8 +51,6 @@ body{
 
 /* ===== GLASS CONTENT ===== */
 .content{
-  position:relative;
-  z-index:2;
   background:rgba(255,255,255,.22);
   border-radius:28px;
   padding:40px 28px;
@@ -135,7 +133,7 @@ p{
 .yes-btn:hover{transform:scale(1.15);}
 
 .no-btn{
-  position:fixed;
+  position:absolute;
   padding:16px 40px;
   border-radius:999px;
   background:#fff;
@@ -143,46 +141,6 @@ p{
   font-weight:600;
   border:none;
   transition:.35s;
-}
-
-/* ================= ZODIAC CONSTELLATION ================= */
-.constellation{
-  position:absolute;
-  top:50%;
-  width:38%;
-  height:70%;
-  background-repeat:no-repeat;
-  background-size:contain;
-  background-position:center;
-  opacity:.55;
-  transform:translateY(-50%);
-  filter:
-    drop-shadow(0 0 14px rgba(255,255,255,.7))
-    drop-shadow(0 0 34px rgba(180,220,255,.45));
-  animation:starFloat 12s ease-in-out infinite;
-  pointer-events:none;
-}
-
-.constellation.taurus{
-  left:-6%;
-  background-image:url("taurus.jpg");
-}
-
-.constellation.sagittarius{
-  right:-6%;
-  background-image:url("sagittarius.jpg");
-  animation-delay:3s;
-}
-
-@keyframes starFloat{
-  0%,100%{
-    transform:translateY(-50%) scale(1);
-    opacity:.45;
-  }
-  50%{
-    transform:translateY(-52%) scale(1.05);
-    opacity:.7;
-  }
 }
 
 /* ================= HEART ================= */
@@ -195,6 +153,13 @@ p{
 @keyframes floatUp{
   from{opacity:1;transform:translateY(0) scale(1);}
   to{opacity:0;transform:translateY(-160px) scale(1.7);}
+}
+
+/* ================= ZODIAC ================= */
+.zodiac{
+  position:absolute;
+  font-size:80px;
+  opacity:.12;
 }
 </style>
 </head>
@@ -220,11 +185,11 @@ spawn(45,'layer2',20,30,22);
 spawn(30,'layer3',28,42,18);
 </script>
 
+<div class="zodiac" style="top:6%;left:6%">♐︎</div>
+<div class="zodiac" style="bottom:10%;right:8%">♉︎</div>
+
 <!-- SCREEN 1 -->
 <section class="section active" id="s1">
-  <div class="constellation taurus"></div>
-  <div class="constellation sagittarius"></div>
-
   <div class="content">
     <h1>Valentine In Bloom 🌸</h1>
     <p>Nhân Mã ♐ mang rung động tự do</p>
@@ -267,25 +232,21 @@ function go(n){
   if(n===2) setTimeout(initNo,120);
 }
 
-/* ===== NO BUTTON (SAFE) ===== */
+/* ===== NO BUTTON ===== */
 const noBtn=document.getElementById('no');
 const yesBtn=document.getElementById('yes');
 
 function initNo(){
   const yes=yesBtn.getBoundingClientRect();
-  noBtn.style.left = yes.right + 30 + 'px';
-  noBtn.style.top  = yes.top + 'px';
+  noBtn.style.left=yes.right+30+'px';
+  noBtn.style.top=yes.top+'px';
+  noBtn.style.position='fixed';
 }
-
 function moveNo(){
-  const pad = 20;
-  const maxX = Math.max(pad, window.innerWidth - noBtn.offsetWidth - pad);
-  const maxY = Math.max(pad, window.innerHeight - noBtn.offsetHeight - pad);
-
-  noBtn.style.left = (Math.random() * (maxX - pad) + pad) + 'px';
-  noBtn.style.top  = (Math.random() * (maxY - pad) + pad) + 'px';
+  const pad=20;
+  noBtn.style.left=Math.random()*(innerWidth-noBtn.offsetWidth-pad)+'px';
+  noBtn.style.top=Math.random()*(innerHeight-noBtn.offsetHeight-pad)+'px';
 }
-
 ['mouseenter','mousemove','touchstart'].forEach(e=>{
   noBtn.addEventListener(e,moveNo);
 });
@@ -303,8 +264,48 @@ yesBtn.onclick=()=>{
       setTimeout(()=>h.remove(),2600);
     },i*60);
   }
-  alert("Giữa muôn sao 🌌\nKim Ngưu chọn cậu,\nNhân Mã cũng chọn cậu 💘");
+  alert("Giữa muôn hoa 🌸\nKim Ngưu chọn cậu,\nNhân Mã cũng chọn cậu 💘");
 };
+
+/* ===== 🌸 FLOWER CURSOR TRAIL ===== */
+const trailFlowers=["🌸","🌼","🌹","✿","❀","🍃","❁","🌷"];
+let last=0;
+
+function trail(x,y){
+  const f=document.createElement('div');
+  f.textContent=trailFlowers[Math.floor(Math.random()*trailFlowers.length)];
+  f.style.position='fixed';
+  f.style.left=x+'px';
+  f.style.top=y+'px';
+  f.style.fontSize=14+Math.random()*18+'px';
+  f.style.opacity=0.9;
+  f.style.pointerEvents='none';
+  f.style.transform=`translate(-50%,-50%) rotate(${Math.random()*360}deg)`;
+  f.style.transition='all 1.5s ease-out';
+  document.body.appendChild(f);
+
+  requestAnimationFrame(()=>{
+    f.style.opacity=0;
+    f.style.transform+=' translateY(-30px) scale(1.4)';
+  });
+  setTimeout(()=>f.remove(),1500);
+}
+
+document.addEventListener('mousemove',e=>{
+  const now=Date.now();
+  if(now-last<40) return;
+  last=now;
+  trail(e.clientX,e.clientY);
+});
+
+document.addEventListener('touchmove',e=>{
+  const t=e.touches[0];
+  if(!t) return;
+  const now=Date.now();
+  if(now-last<60) return;
+  last=now;
+  trail(t.clientX,t.clientY);
+},{passive:true});
 </script>
 
 </body>
