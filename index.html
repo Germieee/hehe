@@ -3,25 +3,34 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Valentine ♐︎ ♉︎</title>
+<title>Valentine Bloom ♐︎ ♉︎</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Pacifico&display=swap" rel="stylesheet">
 
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
+*{margin:0;padding:0;box-sizing:border-box;}
 body{
   font-family:'Poppins',sans-serif;
   height:100vh;
   overflow:hidden;
-  background:linear-gradient(135deg,#ffd1dc,#f6c177,#eac696);
+  background:linear-gradient(135deg,#ffe4ec,#ffd6c9,#fff1c1);
   color:#fff;
 }
 
-/* ===== SECTION ===== */
+/* ================= FLOWER BACKGROUND ================= */
+.flower{
+  position:fixed;
+  font-size:clamp(18px,3vw,36px);
+  opacity:.35;
+  animation:float 18s linear infinite;
+  pointer-events:none;
+}
+@keyframes float{
+  from{transform:translateY(100vh) rotate(0deg);}
+  to{transform:translateY(-120px) rotate(360deg);}
+}
+
+/* ================= SECTION ================= */
 .section{
   position:absolute;
   inset:0;
@@ -34,64 +43,204 @@ body{
   opacity:0;
   pointer-events:none;
   transform:translateY(20px);
-  transition:0.6s ease;
+  transition:.6s ease;
+  backdrop-filter: blur(2px);
 }
 .section.active{
   opacity:1;
   pointer-events:auto;
-  transform:translateY(0);
+  transform:none;
 }
 
-/* ===== TEXT ===== */
+/* ================= TEXT ================= */
 h1{
   font-family:'Pacifico',cursive;
-  font-size:clamp(2.2rem,5vw,3.5rem);
+  font-size:clamp(2.4rem,5vw,3.6rem);
   margin-bottom:20px;
+  text-shadow:0 6px 20px rgba(255,120,150,.4);
 }
 p{
-  font-size:clamp(1rem,2.5vw,1.2rem);
+  font-size:clamp(1rem,2.4vw,1.2rem);
   margin:12px 0;
+  max-width:650px;
 }
 
-/* ===== BUTTON ===== */
+/* ================= BUTTON ================= */
 .btn{
   margin-top:30px;
-  padding:14px 36px;
+  padding:14px 38px;
   border-radius:999px;
   background:#fff;
-  color:#c85b7c;
+  color:#d16b86;
   font-weight:600;
   cursor:pointer;
-  transition:0.25s;
+  transition:.25s;
 }
 .btn:hover{transform:scale(1.08);}
 
-/* ===== STORY ===== */
+/* ================= STORY ================= */
 .story-line{
   opacity:0;
   transform:translateY(10px);
-  transition:0.6s ease;
+  transition:.6s ease;
 }
 .story-line.show{
   opacity:1;
-  transform:translateY(0);
+  transform:none;
 }
 
-/* ===== CONFESSION ===== */
+/* ================= CONFESSION ================= */
 .question{
-  font-size:clamp(1.8rem,5vw,2.6rem);
+  font-size:clamp(1.9rem,5vw,2.8rem);
   font-weight:600;
   margin-bottom:40px;
 }
 
-/* ===== CHOICE ===== */
+/* ================= CHOICE ================= */
 .choice-wrap{
-  position:relative;
   display:flex;
   gap:30px;
 }
 
 .yes-btn{
-  padding:16px 40px;
+  padding:16px 42px;
   border-radius:999px;
-  background:linear-gradient(135deg,#ff5f8f,#ff8
+  background:linear-gradient(135deg,#ff6f91,#ff9a9e);
+  color:#fff;
+  font-weight:600;
+  border:none;
+  cursor:pointer;
+  transition:.25s;
+}
+.yes-btn:hover{transform:scale(1.12);}
+
+.no-btn{
+  position:absolute;
+  padding:14px 36px;
+  border-radius:999px;
+  background:#fff;
+  color:#ff6f91;
+  font-weight:600;
+  border:none;
+  transition:.35s ease;
+}
+
+/* ================= HEART ================= */
+.heart{
+  position:fixed;
+  font-size:20px;
+  animation:floatUp 2.5s linear forwards;
+  pointer-events:none;
+}
+@keyframes floatUp{
+  from{opacity:1;transform:translateY(0) scale(1);}
+  to{opacity:0;transform:translateY(-140px) scale(1.6);}
+}
+
+/* ================= ZODIAC ================= */
+.zodiac{
+  position:absolute;
+  font-size:70px;
+  opacity:.12;
+}
+</style>
+</head>
+
+<body>
+
+<!-- FLOWER DECOR -->
+<script>
+const flowers = [
+  "🌸","🌼","🌹","✿","❀","🌷","🍃","🍀","❁","🌺"
+];
+for(let i=0;i<45;i++){
+  const f=document.createElement('div');
+  f.className='flower';
+  f.textContent=flowers[Math.floor(Math.random()*flowers.length)];
+  f.style.left=Math.random()*100+'vw';
+  f.style.animationDuration=12+Math.random()*14+'s';
+  f.style.fontSize=18+Math.random()*28+'px';
+  document.body.appendChild(f);
+}
+</script>
+
+<div class="zodiac" style="top:8%;left:8%">♐︎</div>
+<div class="zodiac" style="bottom:12%;right:10%">♉︎</div>
+
+<!-- SCREEN 1 -->
+<section class="section active" id="s1">
+  <h1>Valentine Bloom 🌸</h1>
+  <p>Nhân Mã ♐ mang đến sự rung động</p>
+  <p>Kim Ngưu ♉ mang đến cảm giác an toàn</p>
+  <button class="btn" onclick="go(1)">Tiếp nè 🌷</button>
+</section>
+
+<!-- SCREEN 2 -->
+<section class="section" id="s2">
+  <p class="story-line">Giữa rất nhiều hoa nở…</p>
+  <p class="story-line">tớ vẫn chỉ nhìn thấy mỗi cậu.</p>
+  <p class="story-line">Nhẹ nhàng, nhưng rất thật.</p>
+  <button class="btn" onclick="go(2)">Đi tiếp 👉</button>
+</section>
+
+<!-- SCREEN 3 -->
+<section class="section" id="s3">
+  <div class="question">Cậu đồng ý làm bạn gái tớ nhé? 💕</div>
+  <div class="choice-wrap">
+    <button class="yes-btn" id="yes">Đồng ý 💖</button>
+    <button class="no-btn" id="no">Không</button>
+  </div>
+</section>
+
+<script>
+/* SCREEN */
+function go(n){
+  document.querySelector('.section.active').classList.remove('active');
+  document.getElementById('s'+(n+1)).classList.add('active');
+
+  if(n===1){
+    document.querySelectorAll('.story-line')
+      .forEach((el,i)=>setTimeout(()=>el.classList.add('show'),i*700));
+  }
+  if(n===2) setTimeout(initNo,100);
+}
+
+/* NO BUTTON */
+const noBtn=document.getElementById('no');
+const yesBtn=document.getElementById('yes');
+
+function initNo(){
+  const yes=yesBtn.getBoundingClientRect();
+  noBtn.style.left=yes.right+30+'px';
+  noBtn.style.top=yes.top+'px';
+  noBtn.style.position='fixed';
+}
+
+function moveNo(){
+  const pad=20;
+  noBtn.style.left=Math.random()*(innerWidth-noBtn.offsetWidth-pad)+'px';
+  noBtn.style.top=Math.random()*(innerHeight-noBtn.offsetHeight-pad)+'px';
+}
+['mouseenter','mousemove','touchstart'].forEach(e=>{
+  noBtn.addEventListener(e,moveNo);
+});
+
+/* YES */
+yesBtn.onclick=()=>{
+  for(let i=0;i<35;i++){
+    setTimeout(()=>{
+      const h=document.createElement('div');
+      h.className='heart';
+      h.textContent='💖';
+      h.style.left=Math.random()*innerWidth+'px';
+      h.style.top=innerHeight+'px';
+      document.body.appendChild(h);
+      setTimeout(()=>h.remove(),2500);
+    },i*70);
+  }
+  alert("Giữa muôn hoa 🌸\nKim Ngưu chọn cậu,\nNhân Mã cũng chọn cậu 💘");
+};
+</script>
+
+</body>
+</html>
