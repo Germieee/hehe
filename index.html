@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Valentine Bloom ♐︎ ♉︎</title>
+<title>Valentine Watercolor Bloom ♐︎ ♉︎</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Pacifico&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -13,21 +13,33 @@ body{
   font-family:'Poppins',sans-serif;
   height:100vh;
   overflow:hidden;
-  background:linear-gradient(135deg,#ffe4ec,#ffd6c9,#fff1c1);
+  background:linear-gradient(135deg,#ffe1ec,#ffd6c9,#fff3cc);
   color:#fff;
 }
 
-/* ================= FLOWER BACKGROUND ================= */
+/* ================= WATER COLOR FLOWERS ================= */
 .flower{
   position:fixed;
-  font-size:clamp(18px,3vw,36px);
-  opacity:.35;
-  animation:float 18s linear infinite;
   pointer-events:none;
+  animation:float linear infinite;
+  will-change:transform;
 }
+
+.layer-far{
+  opacity:.18;
+  filter:blur(2px);
+}
+.layer-mid{
+  opacity:.32;
+  filter:blur(1px);
+}
+.layer-near{
+  opacity:.45;
+}
+
 @keyframes float{
-  from{transform:translateY(100vh) rotate(0deg);}
-  to{transform:translateY(-120px) rotate(360deg);}
+  from{transform:translateY(110vh) rotate(0deg);}
+  to{transform:translateY(-160px) rotate(360deg);}
 }
 
 /* ================= SECTION ================= */
@@ -35,54 +47,65 @@ body{
   position:absolute;
   inset:0;
   display:flex;
-  flex-direction:column;
   justify-content:center;
   align-items:center;
   text-align:center;
-  padding:20px;
   opacity:0;
   pointer-events:none;
-  transform:translateY(20px);
   transition:.6s ease;
-  backdrop-filter: blur(2px);
 }
 .section.active{
   opacity:1;
   pointer-events:auto;
-  transform:none;
+}
+
+/* ================= GLASS ================= */
+.content{
+  background:rgba(255,255,255,.22);
+  border-radius:30px;
+  padding:44px 30px;
+  backdrop-filter:blur(14px);
+  box-shadow:
+    0 25px 70px rgba(255,120,160,.35),
+    inset 0 0 0 1px rgba(255,255,255,.35);
 }
 
 /* ================= TEXT ================= */
 h1{
   font-family:'Pacifico',cursive;
-  font-size:clamp(2.4rem,5vw,3.6rem);
-  margin-bottom:20px;
-  text-shadow:0 6px 20px rgba(255,120,150,.4);
+  font-size:clamp(2.7rem,5vw,3.9rem);
+  margin-bottom:22px;
+  text-shadow:
+    0 4px 10px rgba(255,90,140,.6),
+    0 12px 36px rgba(255,120,170,.9);
 }
 p{
-  font-size:clamp(1rem,2.4vw,1.2rem);
-  margin:12px 0;
-  max-width:650px;
+  font-size:clamp(1.05rem,2.4vw,1.25rem);
+  margin:14px 0;
+  text-shadow:
+    0 2px 6px rgba(0,0,0,.35),
+    0 0 14px rgba(255,255,255,.7);
 }
 
 /* ================= BUTTON ================= */
 .btn{
-  margin-top:30px;
-  padding:14px 38px;
+  margin-top:32px;
+  padding:16px 44px;
   border-radius:999px;
   background:#fff;
   color:#d16b86;
   font-weight:600;
+  border:none;
   cursor:pointer;
   transition:.25s;
 }
-.btn:hover{transform:scale(1.08);}
+.btn:hover{transform:scale(1.1);}
 
 /* ================= STORY ================= */
 .story-line{
   opacity:0;
   transform:translateY(10px);
-  transition:.6s ease;
+  transition:.6s;
 }
 .story-line.show{
   opacity:1;
@@ -91,19 +114,23 @@ p{
 
 /* ================= CONFESSION ================= */
 .question{
-  font-size:clamp(1.9rem,5vw,2.8rem);
+  font-size:clamp(2.1rem,5vw,3.1rem);
   font-weight:600;
-  margin-bottom:40px;
+  margin-bottom:42px;
+  text-shadow:
+    0 4px 12px rgba(255,90,140,.7),
+    0 14px 40px rgba(255,120,170,.95);
 }
 
 /* ================= CHOICE ================= */
 .choice-wrap{
   display:flex;
-  gap:30px;
+  gap:32px;
+  justify-content:center;
 }
 
 .yes-btn{
-  padding:16px 42px;
+  padding:18px 48px;
   border-radius:999px;
   background:linear-gradient(135deg,#ff6f91,#ff9a9e);
   color:#fff;
@@ -112,35 +139,35 @@ p{
   cursor:pointer;
   transition:.25s;
 }
-.yes-btn:hover{transform:scale(1.12);}
+.yes-btn:hover{transform:scale(1.15);}
 
 .no-btn{
   position:absolute;
-  padding:14px 36px;
+  padding:16px 42px;
   border-radius:999px;
   background:#fff;
   color:#ff6f91;
   font-weight:600;
   border:none;
-  transition:.35s ease;
+  transition:.35s;
 }
 
 /* ================= HEART ================= */
 .heart{
   position:fixed;
-  font-size:20px;
-  animation:floatUp 2.5s linear forwards;
+  font-size:22px;
+  animation:floatUp 2.6s linear forwards;
   pointer-events:none;
 }
 @keyframes floatUp{
   from{opacity:1;transform:translateY(0) scale(1);}
-  to{opacity:0;transform:translateY(-140px) scale(1.6);}
+  to{opacity:0;transform:translateY(-180px) scale(1.8);}
 }
 
 /* ================= ZODIAC ================= */
 .zodiac{
   position:absolute;
-  font-size:70px;
+  font-size:84px;
   opacity:.12;
 }
 </style>
@@ -148,52 +175,77 @@ p{
 
 <body>
 
-<!-- FLOWER DECOR -->
+<!-- ===== FLOWERS GENERATOR ===== -->
 <script>
-const flowers = [
-  "🌸","🌼","🌹","✿","❀","🌷","🍃","🍀","❁","🌺"
-];
-for(let i=0;i<45;i++){
-  const f=document.createElement('div');
-  f.className='flower';
-  f.textContent=flowers[Math.floor(Math.random()*flowers.length)];
-  f.style.left=Math.random()*100+'vw';
-  f.style.animationDuration=12+Math.random()*14+'s';
-  f.style.fontSize=18+Math.random()*28+'px';
-  document.body.appendChild(f);
+const icons=["🌸","🌼","🌹","✿","❀","🌷","🍃","🍀","❁","🌺"];
+const flowers=[];
+
+function spawn(count,cls,min,max,dur){
+  for(let i=0;i<count;i++){
+    const f=document.createElement('div');
+    f.className=`flower ${cls}`;
+    f.textContent=icons[Math.floor(Math.random()*icons.length)];
+    f.style.left=Math.random()*100+'vw';
+    f.style.fontSize=min+Math.random()*(max-min)+'px';
+    f.style.animationDuration=dur+Math.random()*dur+'s';
+    document.body.appendChild(f);
+    flowers.push({el:f,depth:cls});
+  }
 }
+
+spawn(60,'layer-far',14,22,34);
+spawn(45,'layer-mid',20,32,26);
+spawn(35,'layer-near',28,46,20);
 </script>
 
-<div class="zodiac" style="top:8%;left:8%">♐︎</div>
-<div class="zodiac" style="bottom:12%;right:10%">♉︎</div>
+<div class="zodiac" style="top:6%;left:6%">♐︎</div>
+<div class="zodiac" style="bottom:10%;right:8%">♉︎</div>
 
 <!-- SCREEN 1 -->
 <section class="section active" id="s1">
-  <h1>Valentine Bloom 🌸</h1>
-  <p>Nhân Mã ♐ mang đến sự rung động</p>
-  <p>Kim Ngưu ♉ mang đến cảm giác an toàn</p>
-  <button class="btn" onclick="go(1)">Tiếp nè 🌷</button>
+  <div class="content">
+    <h1>Valentine In Bloom 🌸</h1>
+    <p>Nhân Mã ♐ mang rung động tự do</p>
+    <p>Kim Ngưu ♉ mang cảm giác an toàn</p>
+    <button class="btn" onclick="go(1)">Tiếp nè 🌷</button>
+  </div>
 </section>
 
 <!-- SCREEN 2 -->
 <section class="section" id="s2">
-  <p class="story-line">Giữa rất nhiều hoa nở…</p>
-  <p class="story-line">tớ vẫn chỉ nhìn thấy mỗi cậu.</p>
-  <p class="story-line">Nhẹ nhàng, nhưng rất thật.</p>
-  <button class="btn" onclick="go(2)">Đi tiếp 👉</button>
+  <div class="content">
+    <p class="story-line">Giữa cả một vườn hoa vẽ tay…</p>
+    <p class="story-line">tớ vẫn chỉ nhìn thấy cậu.</p>
+    <p class="story-line">Nhẹ – nhưng rất thật.</p>
+    <button class="btn" onclick="go(2)">Đi tiếp 👉</button>
+  </div>
 </section>
 
 <!-- SCREEN 3 -->
 <section class="section" id="s3">
-  <div class="question">Cậu đồng ý làm bạn gái tớ nhé? 💕</div>
-  <div class="choice-wrap">
-    <button class="yes-btn" id="yes">Đồng ý 💖</button>
-    <button class="no-btn" id="no">Không</button>
+  <div class="content">
+    <div class="question">Cậu đồng ý làm bạn gái tớ nhé? 💕</div>
+    <div class="choice-wrap">
+      <button class="yes-btn" id="yes">Đồng ý 💖</button>
+      <button class="no-btn" id="no">Không</button>
+    </div>
   </div>
 </section>
 
 <script>
-/* SCREEN */
+/* ===== PARALLAX ===== */
+document.addEventListener('mousemove',e=>{
+  const x=(e.clientX/window.innerWidth-.5)*30;
+  const y=(e.clientY/window.innerHeight-.5)*30;
+
+  flowers.forEach(f=>{
+    let d = f.depth==='layer-far'?0.2:f.depth==='layer-mid'?0.4:0.7;
+    f.el.style.transform =
+      `translate(${x*d}px,${y*d}px)`;
+  });
+});
+
+/* ===== SCREEN ===== */
 function go(n){
   document.querySelector('.section.active').classList.remove('active');
   document.getElementById('s'+(n+1)).classList.add('active');
@@ -202,10 +254,10 @@ function go(n){
     document.querySelectorAll('.story-line')
       .forEach((el,i)=>setTimeout(()=>el.classList.add('show'),i*700));
   }
-  if(n===2) setTimeout(initNo,100);
+  if(n===2) setTimeout(initNo,120);
 }
 
-/* NO BUTTON */
+/* ===== NO BUTTON ===== */
 const noBtn=document.getElementById('no');
 const yesBtn=document.getElementById('yes');
 
@@ -215,7 +267,6 @@ function initNo(){
   noBtn.style.top=yes.top+'px';
   noBtn.style.position='fixed';
 }
-
 function moveNo(){
   const pad=20;
   noBtn.style.left=Math.random()*(innerWidth-noBtn.offsetWidth-pad)+'px';
@@ -225,9 +276,9 @@ function moveNo(){
   noBtn.addEventListener(e,moveNo);
 });
 
-/* YES */
+/* ===== YES ===== */
 yesBtn.onclick=()=>{
-  for(let i=0;i<35;i++){
+  for(let i=0;i<45;i++){
     setTimeout(()=>{
       const h=document.createElement('div');
       h.className='heart';
@@ -235,10 +286,10 @@ yesBtn.onclick=()=>{
       h.style.left=Math.random()*innerWidth+'px';
       h.style.top=innerHeight+'px';
       document.body.appendChild(h);
-      setTimeout(()=>h.remove(),2500);
-    },i*70);
+      setTimeout(()=>h.remove(),2600);
+    },i*60);
   }
-  alert("Giữa muôn hoa 🌸\nKim Ngưu chọn cậu,\nNhân Mã cũng chọn cậu 💘");
+  alert("Giữa vườn hoa vẽ tay 🌸\nKim Ngưu chọn cậu,\nNhân Mã cũng chọn cậu 💘");
 };
 </script>
 
