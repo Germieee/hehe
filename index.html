@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Valentine Watercolor Bloom ♐︎ ♉︎</title>
+<title>Valentine In Bloom ♐︎ ♉︎</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Pacifico&display=swap" rel="stylesheet">
 
@@ -17,29 +17,19 @@ body{
   color:#fff;
 }
 
-/* ================= WATER COLOR FLOWERS ================= */
+/* ================= FLOWERS ================= */
 .flower{
   position:fixed;
   pointer-events:none;
   animation:float linear infinite;
-  will-change:transform;
 }
-
-.layer-far{
-  opacity:.18;
-  filter:blur(2px);
-}
-.layer-mid{
-  opacity:.32;
-  filter:blur(1px);
-}
-.layer-near{
-  opacity:.45;
-}
+.layer1{opacity:.18; filter:blur(1px);}
+.layer2{opacity:.32;}
+.layer3{opacity:.45;}
 
 @keyframes float{
   from{transform:translateY(110vh) rotate(0deg);}
-  to{transform:translateY(-160px) rotate(360deg);}
+  to{transform:translateY(-140px) rotate(360deg);}
 }
 
 /* ================= SECTION ================= */
@@ -59,38 +49,39 @@ body{
   pointer-events:auto;
 }
 
-/* ================= GLASS ================= */
+/* ===== GLASS CONTENT ===== */
 .content{
   background:rgba(255,255,255,.22);
-  border-radius:30px;
-  padding:44px 30px;
-  backdrop-filter:blur(14px);
+  border-radius:28px;
+  padding:40px 28px;
+  backdrop-filter:blur(12px);
   box-shadow:
-    0 25px 70px rgba(255,120,160,.35),
+    0 20px 60px rgba(255,120,160,.35),
     inset 0 0 0 1px rgba(255,255,255,.35);
 }
 
 /* ================= TEXT ================= */
 h1{
   font-family:'Pacifico',cursive;
-  font-size:clamp(2.7rem,5vw,3.9rem);
+  font-size:clamp(2.6rem,5vw,3.8rem);
   margin-bottom:22px;
   text-shadow:
     0 4px 10px rgba(255,90,140,.6),
-    0 12px 36px rgba(255,120,170,.9);
+    0 8px 30px rgba(255,120,170,.8);
 }
+
 p{
   font-size:clamp(1.05rem,2.4vw,1.25rem);
   margin:14px 0;
   text-shadow:
     0 2px 6px rgba(0,0,0,.35),
-    0 0 14px rgba(255,255,255,.7);
+    0 0 12px rgba(255,255,255,.6);
 }
 
 /* ================= BUTTON ================= */
 .btn{
   margin-top:32px;
-  padding:16px 44px;
+  padding:16px 42px;
   border-radius:999px;
   background:#fff;
   color:#d16b86;
@@ -114,12 +105,12 @@ p{
 
 /* ================= CONFESSION ================= */
 .question{
-  font-size:clamp(2.1rem,5vw,3.1rem);
+  font-size:clamp(2.1rem,5vw,3rem);
   font-weight:600;
   margin-bottom:42px;
   text-shadow:
     0 4px 12px rgba(255,90,140,.7),
-    0 14px 40px rgba(255,120,170,.95);
+    0 10px 36px rgba(255,120,170,.9);
 }
 
 /* ================= CHOICE ================= */
@@ -130,7 +121,7 @@ p{
 }
 
 .yes-btn{
-  padding:18px 48px;
+  padding:18px 46px;
   border-radius:999px;
   background:linear-gradient(135deg,#ff6f91,#ff9a9e);
   color:#fff;
@@ -143,7 +134,7 @@ p{
 
 .no-btn{
   position:absolute;
-  padding:16px 42px;
+  padding:16px 40px;
   border-radius:999px;
   background:#fff;
   color:#ff6f91;
@@ -161,13 +152,13 @@ p{
 }
 @keyframes floatUp{
   from{opacity:1;transform:translateY(0) scale(1);}
-  to{opacity:0;transform:translateY(-180px) scale(1.8);}
+  to{opacity:0;transform:translateY(-160px) scale(1.7);}
 }
 
 /* ================= ZODIAC ================= */
 .zodiac{
   position:absolute;
-  font-size:84px;
+  font-size:80px;
   opacity:.12;
 }
 </style>
@@ -175,27 +166,23 @@ p{
 
 <body>
 
-<!-- ===== FLOWERS GENERATOR ===== -->
+<!-- FLOWERS BACKGROUND -->
 <script>
-const icons=["🌸","🌼","🌹","✿","❀","🌷","🍃","🍀","❁","🌺"];
-const flowers=[];
-
-function spawn(count,cls,min,max,dur){
+const flowerIcons=["🌸","🌼","🌹","✿","❀","🌷","🍃","🍀","❁","🌺"];
+function spawn(count,layer,min,max,dur){
   for(let i=0;i<count;i++){
     const f=document.createElement('div');
-    f.className=`flower ${cls}`;
-    f.textContent=icons[Math.floor(Math.random()*icons.length)];
+    f.className=`flower ${layer}`;
+    f.textContent=flowerIcons[Math.floor(Math.random()*flowerIcons.length)];
     f.style.left=Math.random()*100+'vw';
     f.style.fontSize=min+Math.random()*(max-min)+'px';
     f.style.animationDuration=dur+Math.random()*dur+'s';
     document.body.appendChild(f);
-    flowers.push({el:f,depth:cls});
   }
 }
-
-spawn(60,'layer-far',14,22,34);
-spawn(45,'layer-mid',20,32,26);
-spawn(35,'layer-near',28,46,20);
+spawn(50,'layer1',14,20,30);
+spawn(45,'layer2',20,30,22);
+spawn(30,'layer3',28,42,18);
 </script>
 
 <div class="zodiac" style="top:6%;left:6%">♐︎</div>
@@ -214,9 +201,9 @@ spawn(35,'layer-near',28,46,20);
 <!-- SCREEN 2 -->
 <section class="section" id="s2">
   <div class="content">
-    <p class="story-line">Giữa cả một vườn hoa vẽ tay…</p>
-    <p class="story-line">tớ vẫn chỉ nhìn thấy cậu.</p>
-    <p class="story-line">Nhẹ – nhưng rất thật.</p>
+    <p class="story-line">Giữa cả một vườn hoa nở rộ…</p>
+    <p class="story-line">tớ chỉ thấy mỗi cậu.</p>
+    <p class="story-line">Nhẹ nhàng, nhưng rất thật.</p>
     <button class="btn" onclick="go(2)">Đi tiếp 👉</button>
   </div>
 </section>
@@ -233,18 +220,6 @@ spawn(35,'layer-near',28,46,20);
 </section>
 
 <script>
-/* ===== PARALLAX ===== */
-document.addEventListener('mousemove',e=>{
-  const x=(e.clientX/window.innerWidth-.5)*30;
-  const y=(e.clientY/window.innerHeight-.5)*30;
-
-  flowers.forEach(f=>{
-    let d = f.depth==='layer-far'?0.2:f.depth==='layer-mid'?0.4:0.7;
-    f.el.style.transform =
-      `translate(${x*d}px,${y*d}px)`;
-  });
-});
-
 /* ===== SCREEN ===== */
 function go(n){
   document.querySelector('.section.active').classList.remove('active');
@@ -278,7 +253,7 @@ function moveNo(){
 
 /* ===== YES ===== */
 yesBtn.onclick=()=>{
-  for(let i=0;i<45;i++){
+  for(let i=0;i<40;i++){
     setTimeout(()=>{
       const h=document.createElement('div');
       h.className='heart';
@@ -289,58 +264,47 @@ yesBtn.onclick=()=>{
       setTimeout(()=>h.remove(),2600);
     },i*60);
   }
-  alert("Giữa vườn hoa vẽ tay 🌸\nKim Ngưu chọn cậu,\nNhân Mã cũng chọn cậu 💘");
+  alert("Giữa muôn hoa 🌸\nKim Ngưu chọn cậu,\nNhân Mã cũng chọn cậu 💘");
 };
-</script>
-<script>
-/* ================= FLOWER CURSOR TRAIL ================= */
 
-const trailFlowers = ["🌸","🌼","🌹","✿","❀","🍃","❁","🌷"];
-let lastTime = 0;
+/* ===== 🌸 FLOWER CURSOR TRAIL ===== */
+const trailFlowers=["🌸","🌼","🌹","✿","❀","🍃","❁","🌷"];
+let last=0;
 
-function createFlower(x, y){
-  const f = document.createElement("div");
-  f.textContent = trailFlowers[Math.floor(Math.random()*trailFlowers.length)];
-  f.style.position = "fixed";
-  f.style.left = x + "px";
-  f.style.top = y + "px";
-  f.style.fontSize = 16 + Math.random()*18 + "px";
-  f.style.opacity = 0.9;
-  f.style.pointerEvents = "none";
-  f.style.transform = `
-    translate(-50%, -50%)
-    rotate(${Math.random()*360}deg)
-    scale(${0.8 + Math.random()*0.6})
-  `;
-  f.style.transition = "all 1.6s ease-out";
-  f.style.filter = "blur(0.3px)";
-
+function trail(x,y){
+  const f=document.createElement('div');
+  f.textContent=trailFlowers[Math.floor(Math.random()*trailFlowers.length)];
+  f.style.position='fixed';
+  f.style.left=x+'px';
+  f.style.top=y+'px';
+  f.style.fontSize=14+Math.random()*18+'px';
+  f.style.opacity=0.9;
+  f.style.pointerEvents='none';
+  f.style.transform=`translate(-50%,-50%) rotate(${Math.random()*360}deg)`;
+  f.style.transition='all 1.5s ease-out';
   document.body.appendChild(f);
 
   requestAnimationFrame(()=>{
-    f.style.opacity = 0;
-    f.style.transform += " translateY(-30px) scale(1.4)";
+    f.style.opacity=0;
+    f.style.transform+=' translateY(-30px) scale(1.4)';
   });
-
-  setTimeout(()=>f.remove(),1600);
+  setTimeout(()=>f.remove(),1500);
 }
 
-/* ===== DESKTOP ===== */
-document.addEventListener("mousemove", e=>{
-  const now = Date.now();
-  if(now - lastTime < 40) return; // throttle
-  lastTime = now;
-  createFlower(e.clientX, e.clientY);
+document.addEventListener('mousemove',e=>{
+  const now=Date.now();
+  if(now-last<40) return;
+  last=now;
+  trail(e.clientX,e.clientY);
 });
 
-/* ===== MOBILE ===== */
-document.addEventListener("touchmove", e=>{
-  const touch = e.touches[0];
-  if(!touch) return;
-  const now = Date.now();
-  if(now - lastTime < 60) return;
-  lastTime = now;
-  createFlower(touch.clientX, touch.clientY);
+document.addEventListener('touchmove',e=>{
+  const t=e.touches[0];
+  if(!t) return;
+  const now=Date.now();
+  if(now-last<60) return;
+  last=now;
+  trail(t.clientX,t.clientY);
 },{passive:true});
 </script>
 
