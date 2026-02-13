@@ -5,11 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Valentine ♐︎ ♉︎</title>
 
-<!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Pacifico&display=swap" rel="stylesheet">
 
 <style>
-/* ========== BASE ========== */
 *{
   margin:0;
   padding:0;
@@ -23,7 +21,7 @@ body{
   color:#fff;
 }
 
-/* ========== SECTION ========== */
+/* ===== SECTION ===== */
 .section{
   position:absolute;
   inset:0;
@@ -44,7 +42,7 @@ body{
   transform:translateY(0);
 }
 
-/* ========== TEXT ========== */
+/* ===== TEXT ===== */
 h1{
   font-family:'Pacifico',cursive;
   font-size:clamp(2.2rem,5vw,3.5rem);
@@ -53,27 +51,22 @@ h1{
 p{
   font-size:clamp(1rem,2.5vw,1.2rem);
   margin:12px 0;
-  max-width:620px;
 }
 
-/* ========== BUTTON ========== */
+/* ===== BUTTON ===== */
 .btn{
   margin-top:30px;
   padding:14px 36px;
   border-radius:999px;
-  border:none;
   background:#fff;
   color:#c85b7c;
   font-weight:600;
   cursor:pointer;
   transition:0.25s;
 }
-.btn:hover{
-  transform:scale(1.08);
-  background:#ffe9f0;
-}
+.btn:hover{transform:scale(1.08);}
 
-/* ========== STORY ========== */
+/* ===== STORY ===== */
 .story-line{
   opacity:0;
   transform:translateY(10px);
@@ -84,165 +77,21 @@ p{
   transform:translateY(0);
 }
 
-/* ========== CONFESSION ========== */
+/* ===== CONFESSION ===== */
 .question{
   font-size:clamp(1.8rem,5vw,2.6rem);
   font-weight:600;
   margin-bottom:40px;
 }
 
+/* ===== CHOICE ===== */
 .choice-wrap{
   position:relative;
-  width:100%;
-  height:220px;
+  display:flex;
+  gap:30px;
 }
 
 .yes-btn{
   padding:16px 40px;
   border-radius:999px;
-  background:linear-gradient(135deg,#ff5f8f,#ff8fab);
-  color:#fff;
-  font-size:1.05rem;
-  font-weight:600;
-  border:none;
-  cursor:pointer;
-  transition:0.25s;
-}
-.yes-btn:hover{
-  transform:scale(1.12);
-}
-
-.no-btn{
-  position:absolute;
-  padding:14px 34px;
-  border-radius:999px;
-  background:#fff;
-  color:#ff5f8f;
-  font-weight:600;
-  border:none;
-  transition:0.35s ease;
-}
-
-/* ========== HEARTS ========== */
-.heart{
-  position:fixed;
-  font-size:20px;
-  animation:floatUp 2.5s linear forwards;
-  pointer-events:none;
-}
-@keyframes floatUp{
-  from{opacity:1;transform:translateY(0) scale(1);}
-  to{opacity:0;transform:translateY(-120px) scale(1.6);}
-}
-
-/* ========== ZODIAC DECOR ========== */
-.zodiac{
-  position:absolute;
-  font-size:60px;
-  opacity:0.15;
-  animation:slowFloat 10s linear infinite;
-}
-@keyframes slowFloat{
-  from{transform:translateY(0);}
-  to{transform:translateY(-60px);}
-}
-</style>
-</head>
-
-<body>
-
-<!-- ZODIAC DECOR -->
-<div class="zodiac" style="top:10%;left:10%">♐︎</div>
-<div class="zodiac" style="bottom:15%;right:12%">♉︎</div>
-
-<!-- SCREEN 1 -->
-<section class="section active" id="s1">
-  <h1>Valentine này 💝</h1>
-  <p>Tớ mang chút năng lượng của <b>Nhân Mã ♐︎</b> – tự do, chân thành</p>
-  <p>và một chút của <b>Kim Ngưu ♉︎</b> – ổn định, nghiêm túc.</p>
-  <button class="btn" onclick="go(1)">Tiếp nè 🌸</button>
-</section>
-
-<!-- SCREEN 2 -->
-<section class="section" id="s2">
-  <p class="story-line">Nhân Mã trong tớ thích khám phá…</p>
-  <p class="story-line">nhưng Kim Ngưu lại chỉ muốn dừng chân ở một nơi.</p>
-  <p class="story-line">Và nơi đó… hình như là cậu.</p>
-  <button class="btn" onclick="go(2)">Đi tiếp 👉</button>
-</section>
-
-<!-- SCREEN 3 -->
-<section class="section" id="s3">
-  <div class="question">
-    Cậu đồng ý làm bạn gái tớ nhé? 💕
-  </div>
-
-  <div class="choice-wrap">
-    <button class="yes-btn" id="yes">Đồng ý 💖</button>
-    <button class="no-btn" id="no">Không</button>
-  </div>
-</section>
-
-<script>
-/* ===== SCREEN SWITCH ===== */
-function go(n){
-  document.querySelector('.section.active').classList.remove('active');
-  document.getElementById('s'+(n+1)).classList.add('active');
-
-  if(n===1){
-    document.querySelectorAll('.story-line')
-      .forEach((el,i)=>setTimeout(()=>el.classList.add('show'),i*700));
-  }
-  if(n===2) moveNo();
-}
-
-/* ===== NO BUTTON EVADE ===== */
-const noBtn=document.getElementById('no');
-
-function moveNo(){
-  const pad=20;
-  const w=window.innerWidth-noBtn.offsetWidth-pad;
-  const h=window.innerHeight-noBtn.offsetHeight-pad;
-  noBtn.style.left=Math.random()*w+'px';
-  noBtn.style.top=Math.random()*h+'px';
-}
-
-['mouseenter','touchstart','mousemove'].forEach(e=>{
-  noBtn.addEventListener(e,moveNo);
-});
-
-/* ===== YES BUTTON ===== */
-document.getElementById('yes').onclick=()=>{
-  noBtn.style.display='none';
-  document.getElementById('yes').style.display='none';
-  hearts();
-  alert("Tớ biết mà 🥰\nNhân Mã đã chọn dừng lại,\nKim Ngưu thì đã chọn cậu 💘");
-};
-
-function hearts(){
-  for(let i=0;i<35;i++){
-    setTimeout(()=>{
-      const h=document.createElement('div');
-      h.className='heart';
-      h.textContent='💖';
-      h.style.left=Math.random()*innerWidth+'px';
-      h.style.top=innerHeight+'px';
-      document.body.appendChild(h);
-      setTimeout(()=>h.remove(),2500);
-    },i*70);
-  }
-}
-
-/* ===== CURSOR HEART ===== */
-document.addEventListener('mousemove',e=>{
-  const h=document.createElement('div');
-  h.className='heart';
-  h.textContent='❤️';
-  h.style.left=e.clientX+'px';
-  h.style.top=e.clientY+'px';
-  document.body.appendChild(h);
-  setTimeout(()=>h.remove(),2000);
-});
-</script>
-</body>
-</html>
+  background:linear-gradient(135deg,#ff5f8f,#ff8
