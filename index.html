@@ -51,6 +51,8 @@ body{
 
 /* ===== GLASS CONTENT ===== */
 .content{
+  position:relative;
+  z-index:2;
   background:rgba(255,255,255,.22);
   border-radius:28px;
   padding:40px 28px;
@@ -143,6 +145,46 @@ p{
   transition:.35s;
 }
 
+/* ================= ZODIAC CONSTELLATION ================= */
+.constellation{
+  position:absolute;
+  top:50%;
+  width:38%;
+  height:70%;
+  background-repeat:no-repeat;
+  background-size:contain;
+  background-position:center;
+  opacity:.55;
+  transform:translateY(-50%);
+  filter:
+    drop-shadow(0 0 14px rgba(255,255,255,.7))
+    drop-shadow(0 0 34px rgba(180,220,255,.45));
+  animation:starFloat 12s ease-in-out infinite;
+  pointer-events:none;
+}
+
+.constellation.taurus{
+  left:-6%;
+  background-image:url("taurus.jpg");
+}
+
+.constellation.sagittarius{
+  right:-6%;
+  background-image:url("sagittarius.jpg");
+  animation-delay:3s;
+}
+
+@keyframes starFloat{
+  0%,100%{
+    transform:translateY(-50%) scale(1);
+    opacity:.45;
+  }
+  50%{
+    transform:translateY(-52%) scale(1.05);
+    opacity:.7;
+  }
+}
+
 /* ================= HEART ================= */
 .heart{
   position:fixed;
@@ -153,13 +195,6 @@ p{
 @keyframes floatUp{
   from{opacity:1;transform:translateY(0) scale(1);}
   to{opacity:0;transform:translateY(-160px) scale(1.7);}
-}
-
-/* ================= ZODIAC ================= */
-.zodiac{
-  position:absolute;
-  font-size:80px;
-  opacity:.12;
 }
 </style>
 </head>
@@ -185,16 +220,9 @@ spawn(45,'layer2',20,30,22);
 spawn(30,'layer3',28,42,18);
 </script>
 
-<div class="zodiac" style="top:6%;left:6%">♐︎</div>
-<div class="zodiac" style="bottom:10%;right:8%">♉︎</div>
-
 <!-- SCREEN 1 -->
-<section class="section active zodiac-bg" id="s1">
-
-  <!-- Taurus LEFT -->
+<section class="section active" id="s1">
   <div class="constellation taurus"></div>
-
-  <!-- Sagittarius RIGHT -->
   <div class="constellation sagittarius"></div>
 
   <div class="content">
@@ -203,9 +231,7 @@ spawn(30,'layer3',28,42,18);
     <p>Kim Ngưu ♉ mang cảm giác an toàn</p>
     <button class="btn" onclick="go(1)">Tiếp nè 🌷</button>
   </div>
-
 </section>
-
 
 <!-- SCREEN 2 -->
 <section class="section" id="s2">
@@ -241,7 +267,7 @@ function go(n){
   if(n===2) setTimeout(initNo,120);
 }
 
-/* ===== NO BUTTON (FIXED) ===== */
+/* ===== NO BUTTON (SAFE) ===== */
 const noBtn=document.getElementById('no');
 const yesBtn=document.getElementById('yes');
 
@@ -253,21 +279,11 @@ function initNo(){
 
 function moveNo(){
   const pad = 20;
+  const maxX = Math.max(pad, window.innerWidth - noBtn.offsetWidth - pad);
+  const maxY = Math.max(pad, window.innerHeight - noBtn.offsetHeight - pad);
 
-  const maxX = Math.max(
-    pad,
-    window.innerWidth - noBtn.offsetWidth - pad
-  );
-  const maxY = Math.max(
-    pad,
-    window.innerHeight - noBtn.offsetHeight - pad
-  );
-
-  const x = Math.random() * (maxX - pad) + pad;
-  const y = Math.random() * (maxY - pad) + pad;
-
-  noBtn.style.left = x + 'px';
-  noBtn.style.top  = y + 'px';
+  noBtn.style.left = (Math.random() * (maxX - pad) + pad) + 'px';
+  noBtn.style.top  = (Math.random() * (maxY - pad) + pad) + 'px';
 }
 
 ['mouseenter','mousemove','touchstart'].forEach(e=>{
@@ -287,7 +303,7 @@ yesBtn.onclick=()=>{
       setTimeout(()=>h.remove(),2600);
     },i*60);
   }
-  alert("Giữa muôn hoa 🌸\nKim Ngưu chọn cậu,\nNhân Mã cũng chọn cậu 💘");
+  alert("Giữa muôn sao 🌌\nKim Ngưu chọn cậu,\nNhân Mã cũng chọn cậu 💘");
 };
 </script>
 
