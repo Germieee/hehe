@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valentine In Bloom ♐︎ ♉︎</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Pacifico&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  font-family:'Poppins',sans-serif;
+  height:100vh;
+  overflow:hidden;
+  background:linear-gradient(135deg,#ffe1ec,#ffd6c9,#fff3cc);
+  color:#fff;
+}
+
+/* ================= FLOWERS ================= */
+.flower{
+  position:fixed;
+  pointer-events:none;
+  animation:float linear infinite;
+}
+.layer1{opacity:.18; filter:blur(1px);}
+.layer2{opacity:.32;}
+.layer3{opacity:.45;}
+
+@keyframes float{
+  from{transform:translateY(110vh) rotate(0deg);}
+  to{transform:translateY(-140px) rotate(360deg);}
+}
+
+/* ================= SECTION ================= */
+.section{
+  position:absolute;
+  inset:0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  opacity:0;
+  pointer-events:none;
+  transition:.6s ease;
+}
+.section.active{
+  opacity:1;
+  pointer-events:auto;
+}
+
+/* ===== GLASS CONTENT ===== */
+.content{
+  background:rgba(255,255,255,.22);
+  border-radius:28px;
+  padding:40px 28px;
+  backdrop-filter:blur(12px);
+  box-shadow:
+    0 20px 60px rgba(255,120,160,.35),
+    inset 0 0 0 1px rgba(255,255,255,.35);
+}
+
+/* ================= TEXT ================= */
+h1{
+  font-family:'Pacifico',cursive;
+  font-size:clamp(2.6rem,5vw,3.8rem);
+  margin-bottom:22px;
+  text-shadow:
+    0 4px 10px rgba(255,90,140,.6),
+    0 8px 30px rgba(255,120,170,.8);
+}
+
+p{
+  font-size:clamp(1.05rem,2.4vw,1.25rem);
+  margin:14px 0;
+  text-shadow:
+    0 2px 6px rgba(0,0,0,.35),
+    0 0 12px rgba(255,255,255,.6);
+}
+
+/* ================= BUTTON ================= */
+.btn{
+  margin-top:32px;
+  padding:16px 42px;
+  border-radius:999px;
+  background:#fff;
+  color:#d16b86;
+  font-weight:600;
+  border:none;
+  cursor:pointer;
+  transition:.25s;
+}
+.btn:hover{transform:scale(1.1);}
+
+/* ================= STORY ================= */
+.story-line{
+  opacity:0;
+  transform:translateY(10px);
+  transition:.6s;
+}
+.story-line.show{
+  opacity:1;
+  transform:none;
+}
+
+/* ================= CONFESSION ================= */
+.question{
+  font-size:clamp(2.1rem,5vw,3rem);
+  font-weight:600;
+  margin-bottom:42px;
+  text-shadow:
+    0 4px 12px rgba(255,90,140,.7),
+    0 10px 36px rgba(255,120,170,.9);
+}
+
+/* ================= CHOICE ================= */
+.choice-wrap{
+  display:flex;
+  gap:32px;
+  justify-content:center;
+}
+
+.yes-btn{
+  padding:18px 46px;
+  border-radius:999px;
+  background:linear-gradient(135deg,#ff6f91,#ff9a9e);
+  color:#fff;
+  font-weight:600;
+  border:none;
+  cursor:pointer;
+  transition:.25s;
+}
+.yes-btn:hover{transform:scale(1.15);}
+
+.no-btn{
+  position:absolute;
+  padding:16px 40px;
+  border-radius:999px;
+  background:#fff;
+  color:#ff6f91;
+  font-weight:600;
+  border:none;
+  transition:.35s;
+}
+
+/* ================= HEART ================= */
+.heart{
+  position:fixed;
+  font-size:22px;
+  animation:floatUp 2.6s linear forwards;
+  pointer-events:none;
+}
+@keyframes floatUp{
+  from{opacity:1;transform:translateY(0) scale(1);}
+  to{opacity:0;transform:translateY(-160px) scale(1.7);}
+}
+
+/* ================= ZODIAC ================= */
+.zodiac{
+  position:absolute;
+  font-size:80px;
+  opacity:.12;
+}
+</style>
+</head>
+
+<body>
+
+<!-- FLOWERS BACKGROUND -->
+<script>
+const flowerIcons=["🌸","🌼","🌹","✿","❀","🌷","🍃","🍀","❁","🌺"];
+function spawn(count,layer,min,max,dur){
+  for(let i=0;i<count;i++){
+    const f=document.createElement('div');
+    f.className=`flower ${layer}`;
+    f.textContent=flowerIcons[Math.floor(Math.random()*flowerIcons.length)];
+    f.style.left=Math.random()*100+'vw';
+    f.style.fontSize=min+Math.random()*(max-min)+'px';
+    f.style.animationDuration=dur+Math.random()*dur+'s';
+    document.body.appendChild(f);
+  }
+}
+spawn(50,'layer1',14,20,30);
+spawn(45,'layer2',20,30,22);
+spawn(30,'layer3',28,42,18);
+</script>
+
+<div class="zodiac" style="top:6%;left:6%">♐︎</div>
+<div class="zodiac" style="bottom:10%;right:8%">♉︎</div>
+
+<!-- SCREEN 1 -->
+<section class="section active" id="s1">
+  <div class="content">
+    <h1>Valentine In Bloom 🌸</h1>
+    <p>Nhân Mã ♐ mang rung động tự do</p>
+    <p>Kim Ngưu ♉ mang cảm giác an toàn</p>
+    <button class="btn" onclick="go(1)">Tiếp nè 🌷</button>
+  </div>
+</section>
+
+<!-- SCREEN 2 -->
+<section class="section" id="s2">
+  <div class="content">
+    <p class="story-line">Giữa cả một vườn hoa nở rộ…</p>
+    <p class="story-line">tớ chỉ thấy mỗi cậu.</p>
+    <p class="story-line">Nhẹ nhàng, nhưng rất thật.</p>
+    <button class="btn" onclick="go(2)">Đi tiếp 👉</button>
+  </div>
+</section>
+
+<!-- SCREEN 3 -->
+<section class="section" id="s3">
+  <div class="content">
+    <div class="question">Cậu đồng ý làm bạn gái tớ nhé? 💕</div>
+    <div class="choice-wrap">
+      <button class="yes-btn" id="yes">Đồng ý 💖</button>
+      <button class="no-btn" id="no">Không</button>
+    </div>
+  </div>
+</section>
+
+<script>
+/* ===== SCREEN ===== */
+function go(n){
+  document.querySelector('.section.active').classList.remove('active');
+  document.getElementById('s'+(n+1)).classList.add('active');
+
+  if(n===1){
+    document.querySelectorAll('.story-line')
+      .forEach((el,i)=>setTimeout(()=>el.classList.add('show'),i*700));
+  }
+  if(n===2) setTimeout(initNo,120);
+}
+
+/* ===== NO BUTTON ===== */
+const noBtn=document.getElementById('no');
+const yesBtn=document.getElementById('yes');
+
+function initNo(){
+  const yes=yesBtn.getBoundingClientRect();
+  noBtn.style.left=yes.right+30+'px';
+  noBtn.style.top=yes.top+'px';
+  noBtn.style.position='fixed';
+}
+function moveNo(){
+  const pad=20;
+  noBtn.style.left=Math.random()*(innerWidth-noBtn.offsetWidth-pad)+'px';
+  noBtn.style.top=Math.random()*(innerHeight-noBtn.offsetHeight-pad)+'px';
+}
+['mouseenter','mousemove','touchstart'].forEach(e=>{
+  noBtn.addEventListener(e,moveNo);
+});
+
+/* ===== YES ===== */
+yesBtn.onclick=()=>{
+  for(let i=0;i<40;i++){
+    setTimeout(()=>{
+      const h=document.createElement('div');
+      h.className='heart';
+      h.textContent='💖';
+      h.style.left=Math.random()*innerWidth+'px';
+      h.style.top=innerHeight+'px';
+      document.body.appendChild(h);
+      setTimeout(()=>h.remove(),2600);
+    },i*60);
+  }
+  alert("Giữa muôn hoa 🌸\nKim Ngưu chọn cậu,\nNhân Mã cũng chọn cậu 💘");
+};
+
+/* ===== 🌸 FLOWER CURSOR TRAIL ===== */
+const trailFlowers=["🌸","🌼","🌹","✿","❀","🍃","❁","🌷"];
+let last=0;
+
+function trail(x,y){
+  const f=document.createElement('div');
+  f.textContent=trailFlowers[Math.floor(Math.random()*trailFlowers.length)];
+  f.style.position='fixed';
+  f.style.left=x+'px';
+  f.style.top=y+'px';
+  f.style.fontSize=14+Math.random()*18+'px';
+  f.style.opacity=0.9;
+  f.style.pointerEvents='none';
+  f.style.transform=`translate(-50%,-50%) rotate(${Math.random()*360}deg)`;
+  f.style.transition='all 1.5s ease-out';
+  document.body.appendChild(f);
+
+  requestAnimationFrame(()=>{
+    f.style.opacity=0;
+    f.style.transform+=' translateY(-30px) scale(1.4)';
+  });
+  setTimeout(()=>f.remove(),1500);
+}
+
+document.addEventListener('mousemove',e=>{
+  const now=Date.now();
+  if(now-last<40) return;
+  last=now;
+  trail(e.clientX,e.clientY);
+});
+
+document.addEventListener('touchmove',e=>{
+  const t=e.touches[0];
+  if(!t) return;
+  const now=Date.now();
+  if(now-last<60) return;
+  last=now;
+  trail(t.clientX,t.clientY);
+},{passive:true});
+</script>
+
+</body>
+</html>
